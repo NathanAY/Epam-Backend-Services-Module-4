@@ -10,6 +10,16 @@ services:
       - '5432:5432'
     volumes:
       - db:/var/lib/postgresql/data
+
+  app:
+    image: secret-providers
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/task43
+    depends_on:
+      - db
+
 volumes:
   db:
     driver: local
